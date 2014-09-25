@@ -9,7 +9,7 @@ from django.contrib.sites.models import Site
 from django.template import Template, Context
 
 from dbmail.models import MailTemplate, MailLog
-from dbmail.defaults import RETRY_INTERVAL
+from dbmail.defaults import SEND_RETRY
 
 html_parser = HTMLParser.HTMLParser()
 
@@ -115,7 +115,7 @@ class SendMail(object):
                     self._err_msg = traceback.format_exc()
                     print '[dbmail]', msg.__unicode__()
                     raise
-                time.sleep(RETRY_INTERVAL)
+                time.sleep(SEND_RETRY)
 
     def send(self):
         try:
